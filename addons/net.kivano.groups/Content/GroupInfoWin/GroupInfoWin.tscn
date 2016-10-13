@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/net.kivano.groups/Content/GroupInfoWin/GroupInfoWin.gd" type="Script" id=1]
 [ext_resource path="res://addons/net.kivano.groups/Content/GroupInfoWin/AddMethodPopup/AddMethodPopup.tscn" type="PackedScene" id=2]
 
-
 [node name="GroupDesc" type="WindowDialog"]
 
 anchor/left = 3
@@ -23,33 +22,93 @@ window/title = "Group"
 script/script = ExtResource( 1 )
 path2GroupManagerRoot = NodePath("..")
 
-[node name="titleDesc" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 1.0
-margin/top = 13.0
-margin/right = 67.0
-margin/bottom = 27.0
-text = "Description:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="description" type="TextEdit" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 
 anchor/right = 1
-hint/tooltip = "Describe what is purpose of this group here."
+anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 36.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 6
+
+[node name="Split 1" type="VSplitContainer" parent="Margin"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
 margin/left = 4.0
-margin/top = 30.0
-margin/right = 6.0
-margin/bottom = 155.0
+margin/top = 4.0
+margin/right = 584.0
+margin/bottom = 514.0
+split/offset = 50
+split/collapsed = false
+split/dragger_visibility = 0
+
+[node name="Split Top" type="VSplitContainer" parent="Margin/Split 1"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+size_flags/stretch_ratio = 0.0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 580.0
+margin/bottom = 319.0
+split/offset = 100
+split/collapsed = false
+split/dragger_visibility = 0
+
+[node name="Descr Box" type="VBoxContainer" parent="Margin/Split 1/Split Top"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 580.0
+margin/bottom = 126.0
+alignment = 0
+
+[node name="titleDesc" type="Label" parent="Margin/Split 1/Split Top/Descr Box"]
+
+rect/min_size = Vector2( 0, 16 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 3.0
+margin/right = 580.0
+margin/bottom = 19.0
+text = "Description:"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="description" type="TextEdit" parent="Margin/Split 1/Split Top/Descr Box"]
+
+hint/tooltip = "Describe what is purpose of this group here."
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 20.0
+margin/right = 580.0
+margin/bottom = 126.0
 syntax_highlighting = false
 show_line_numbers = false
 highlight_all_occurrences = false
@@ -57,150 +116,199 @@ caret/block_caret = false
 caret/caret_blink = false
 caret/caret_blink_speed = 0.65
 
-[node name="titleMethods" type="Label" parent="."]
+[node name="Methods Box" type="VBoxContainer" parent="Margin/Split 1/Split Top"]
 
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 138.0
+margin/right = 580.0
+margin/bottom = 319.0
+alignment = 0
+
+[node name="Methods bar" type="Container" parent="Margin/Split 1/Split Top/Methods Box"]
+
+rect/min_size = Vector2( 0, 20 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 580.0
+margin/bottom = 20.0
+
+[node name="titleMethods" type="Label" parent="Margin/Split 1/Split Top/Methods Box/Methods bar"]
+
+anchor/top = 3
+anchor/bottom = 3
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 163.0
-margin/right = 121.0
-margin/bottom = 177.0
+margin/top = 4.0
+margin/right = 191.0
+margin/bottom = -12.0
 text = "Required Methods:"
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="methodList" type="ItemList" parent="."]
-
-anchor/right = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 2.0
-margin/top = 180.0
-margin/right = 5.0
-margin/bottom = 293.0
-
-[node name="editDescriptionBtn" type="Button" parent="."]
+[node name="addMethodBtn" type="Button" parent="Margin/Split 1/Split Top/Methods Box/Methods bar"]
 
 anchor/left = 1
+anchor/top = 3
 anchor/right = 1
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 117.0
+margin/left = 52.0
 margin/top = 10.0
-margin/right = 5.0
-margin/bottom = 30.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "Edit description"
-flat = false
-
-[node name="addMethodBtn" type="Button" parent="."]
-
-anchor/left = 1
-anchor/right = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 30.0
-margin/top = 160.0
-margin/right = 10.0
-margin/bottom = 180.0
+margin/right = 32.0
+margin/bottom = -10.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "+"
 flat = false
 
-[node name="removeMethod" type="Button" parent="."]
+[node name="removeMethod" type="Button" parent="Margin/Split 1/Split Top/Methods Box/Methods bar"]
 
 anchor/left = 1
+anchor/top = 3
 anchor/right = 1
+anchor/bottom = 3
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 56.0
-margin/top = 160.0
-margin/right = 36.0
-margin/bottom = 180.0
+margin/left = 26.0
+margin/top = 10.0
+margin/right = 6.0
+margin/bottom = -10.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "-"
 flat = false
 
-[node name="saveBtn" type="Button" parent="."]
+[node name="methodList" type="ItemList" parent="Margin/Split 1/Split Top/Methods Box"]
 
-anchor/left = 1
-anchor/top = 1
-anchor/right = 1
-anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 24.0
+margin/right = 580.0
+margin/bottom = 181.0
+
+[node name="Scenes Box" type="VBoxContainer" parent="Margin/Split 1"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 331.0
+margin/right = 580.0
+margin/bottom = 510.0
+alignment = 0
+
+[node name="titleMembers" type="Label" parent="Margin/Split 1/Scenes Box"]
+
+rect/min_size = Vector2( 0, 18 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
 size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 124.0
-margin/top = 248.0
-margin/right = 1.0
-margin/bottom = 219.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "Save Changes"
-flat = false
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 580.0
+margin/bottom = 18.0
+text = "Member scenes:"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="memberList" type="ItemList" parent="Margin/Split 1/Scenes Box"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 22.0
+margin/right = 580.0
+margin/bottom = 179.0
 
 [node name="AddMethodPopup" parent="." instance=ExtResource( 2 )]
 
 visibility/visible = false
 
-[node name="titleMembers" type="Label" parent="."]
-
-anchor/top = 1
-anchor/bottom = 1
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 1.0
-margin/top = 228.0
-margin/right = 122.0
-margin/bottom = 214.0
-text = "Member scenes:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="members" type="ItemList" parent="."]
+[node name="Bottom Buttons" type="HBoxContainer" parent="."]
 
 anchor/top = 1
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
+focus/stop_mouse = false
+size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 3.0
-margin/top = 211.0
-margin/right = 4.0
-margin/bottom = 8.0
+margin/left = 162.0
+margin/top = 36.0
+margin/right = 162.0
+margin/bottom = 6.0
+custom_constants/separation = 12
+alignment = 0
 
-[connection signal="pressed" from="editDescriptionBtn" to="." method="_on_editDescriptionBtn_pressed"]
+[node name="OK Button" type="Button" parent="Bottom Buttons"]
 
-[connection signal="pressed" from="addMethodBtn" to="." method="_on_addMethodBtn_pressed"]
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 126.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "OK"
+flat = false
 
-[connection signal="pressed" from="removeMethod" to="." method="_on_removeMethod_pressed"]
+[node name="Cancel Button" type="Button" parent="Bottom Buttons"]
 
-[connection signal="pressed" from="saveBtn" to="." method="_on_saveBtn_pressed"]
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 138.0
+margin/top = 0.0
+margin/right = 264.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Cancel"
+flat = false
+
+[connection signal="pressed" from="Margin/Split 1/Split Top/Methods Box/Methods bar/addMethodBtn" to="." method="_on_addMethodBtn_pressed"]
+
+[connection signal="pressed" from="Margin/Split 1/Split Top/Methods Box/Methods bar/removeMethod" to="." method="_on_removeMethod_pressed"]
 
 [connection signal="onMethodSave" from="AddMethodPopup" to="." method="_on_AddMethodPopup_onMethodSave"]
+
+[connection signal="pressed" from="Bottom Buttons/OK Button" to="." method="_on_OK_Button_pressed"]
+
+[connection signal="pressed" from="Bottom Buttons/Cancel Button" to="." method="_on_Cancel_Button_pressed"]
 
 

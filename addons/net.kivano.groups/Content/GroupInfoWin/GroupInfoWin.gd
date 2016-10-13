@@ -21,7 +21,8 @@ signal onSave(groupID, groupDesc, groupMethods);
 
 export (NodePath) var path2GroupManagerRoot = NodePath("..");
 
-var methodList;
+var methodList
+var memberList
 
 var groupManagerLogicRoot;
 var currentGroupID;
@@ -32,12 +33,12 @@ var currentGroupID;
 ##################################################################################
 func _notification(what):
 	if (what == NOTIFICATION_INSTANCED):
-		methodList = get_node("methodList");
-		get_node("description").set_readonly(true);
+		methodList = get_node("Margin/Split 1/Split Top/Methods Box/methodList")
+		memberList = get_node("Margin/Split 1/Scenes Box/memberList")
 	elif(what == NOTIFICATION_READY):
 		 groupManagerLogicRoot = get_node(path2GroupManagerRoot);
-		
-		
+
+
 ##################################################################################
 #########                       Getters and Setters                      #########
 ##################################################################################
@@ -45,23 +46,22 @@ func showGroup(inGroup, group2SceneValidationInfo):
 	
 	#
 	currentGroupID = inGroup;
-	get_node("members").clear();
-	get_node("titleDesc").set_text("Group: " + currentGroupID);
-	get_node("methodList").clear();
-	get_node("description").set_text("");
+	memberList.clear();
+	get_node("Margin/Split 1/Split Top/Descr Box/titleDesc").set_text("Group: " + currentGroupID);
+	methodList.clear();
+	get_node("Margin/Split 1/Split Top/Descr Box/description").set_text("");
 	
 	#
 	if(groupManagerLogicRoot.hasDescription4Group(currentGroupID)):
 		var desc = groupManagerLogicRoot.getGroupDesc(inGroup);
-		get_node("description").set_text(desc);
+		get_node("Margin/Split 1/Split Top/Descr Box/description").set_text(desc);
 		var methods = groupManagerLogicRoot.getGroupMethodsInList(inGroup);
-		for method in methods: get_node("methodList").add_item(method);
-	
+		for method in methods: methodList.add_item(method);
 	
 	#
 	var linkedScenes = group2SceneValidationInfo[inGroup];
 	for scene in linkedScenes:
-#		get_node("members").add_item(scene.filePath);
+#		get_node("Margin/Split 1/Scenes Box/members").add_item(scene.filePath);
 		addScene2SceneList(currentGroupID, scene)
 	
 	popup();
@@ -71,17 +71,16 @@ func addScene2SceneList(inGroup, inScene):
 	print("scene name: ", inScene.filePath, " group: ", inGroup);
 	
 	var validationStatus = groupManagerLogicRoot.getValidationStatus4Scene(inGroup, inScene.filePath)
-	get_node("members").add_item(inScene.filePath);
-	var lastItemIdx =get_node("members").get_item_count() - 1;
+	memberList.add_item(inScene.filePath);
+	var lastItemIdx = memberList.get_item_count() - 1;
 	if(validationStatus == groupManagerLogicRoot.VALIDATION_STAT_4_SCENE_OK ):
-		get_node("members").set_item_icon(lastItemIdx, groupManagerLogicRoot.ICO_OK);
-		get_node("members").set_item_tooltip(lastItemIdx, "All methods implemented")
+		memberList.set_item_icon(lastItemIdx, groupManagerLogicRoot.ICO_OK);
+		memberList.set_item_tooltip(lastItemIdx, "All methods implemented")
 	else:
-		get_node("members").set_item_icon(lastItemIdx, groupManagerLogicRoot.ICO_ERROR);
-		get_node("members").set_item_tooltip(lastItemIdx, "Need to implement one or more methods")
-	
-	
-	
+		memberList.set_item_icon(lastItemIdx, groupManagerLogicRoot.ICO_ERROR);
+		memberList.set_item_tooltip(lastItemIdx, "Need to implement one or more methods")
+
+
 #	groupManagerLogicRoot
 
 ##################################################################################
@@ -95,26 +94,26 @@ func addScene2SceneList(inGroup, inScene):
 ##################################################################################
 #########                       Connected Signals                        #########
 ##################################################################################
-func _on_editDescriptionBtn_pressed():
-	get_node("description").set_readonly(false);
-
 func _on_addMethodBtn_pressed():
 	get_node("AddMethodPopup").popup();
-	
+
 func _on_removeMethod_pressed():
-	var selectedItems = get_node("methodList").get_selected_items();
+	var selectedItems = methodList.get_selected_items();
 	for idx in selectedItems:
-		get_node("methodList").remove_item(idx);
-	
+		methodList.remove_item(idx);
+
 func _on_AddMethodPopup_onMethodSave(inMethodName, inParamString):
-	get_node("methodList").add_item(inMethodName + "(" + inParamString + ")");
-	
-func _on_saveBtn_pressed():
+	methodList.add_item(inMethodName + "(" + inParamString + ")");
+
+func _on_OK_Button_pressed():
 	var methods = putMethodsInfo2String();
-	var desc = get_node("description").get_text();
+	var desc = get_node("Margin/Split 1/Split Top/Descr Box/description").get_text();
 	emit_signal("onSave", currentGroupID, desc, methods)
 	hide();
-	
+
+func _on_Cancel_Button_pressed():
+	hide()
+
 func putMethodsInfo2String():
 	var methodsString = "";
 	var nmbOfMethods = methodList.get_item_count();
@@ -124,6 +123,7 @@ func putMethodsInfo2String():
 	if(methodsString.begins_with("|")):
 		methodsString = methodsString.right(1);
 	return methodsString;
+
 ##################################################################################
 #########     Methods fired because of events (usually via Groups interface)  ####
 ##################################################################################
@@ -139,13 +139,3 @@ func putMethodsInfo2String():
 ##################################################################################
 #########                         Inner Classes                          #########
 ##################################################################################
-
-
-
-
-
-
-
-
-
-
