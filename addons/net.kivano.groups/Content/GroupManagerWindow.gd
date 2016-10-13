@@ -25,7 +25,7 @@ const GROUP_STATUS_VALIDATE = 3;
 const VALIDATION_STAT_4_SCENE_OK = 1;
 const VALIDATION_STAT_4_SCENE_ERROR = 2;
 
-const MSG_NOT_ADDED_2_MANAGER = "Group Manager don't know this group, double click to fill info";
+const MSG_NOT_ADDED_2_MANAGER = "Group Manager doesn't know this group, double click to fill info";
 const MSG_SCN_NOT_VALIDATE = "Some scenes that are part of this group don't validate for required methods";
 const MSG_GROUP_OK = "No problem here";
 
