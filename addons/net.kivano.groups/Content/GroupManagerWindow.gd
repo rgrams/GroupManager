@@ -29,9 +29,9 @@ const MSG_NOT_ADDED_2_MANAGER = "Group Manager doesn't know this group, double c
 const MSG_SCN_NOT_VALIDATE = "Some scenes that are part of this group don't validate for required methods";
 const MSG_GROUP_OK = "No problem here";
 
-const ICO_OK      = preload("res://addons/net.kivano.groups/Content/assets/ok_ico.png");
-const ICO_ERROR   = preload("res://addons/net.kivano.groups/Content/assets/error_ico.png");
-const ICO_WARNING = preload("res://addons/net.kivano.groups/Content/assets/warning_ico.png");
+const ICO_OK      = preload("res://addons/net.kivano.groups/Content/assets/R_ok_ico.png");
+const ICO_ERROR   = preload("res://addons/net.kivano.groups/Content/assets/R_error_ico.png");
+const ICO_WARNING = preload("res://addons/net.kivano.groups/Content/assets/R_warning_ico.png");
 
 var uiGroupList;
 
@@ -56,7 +56,7 @@ func _enter_tree():
 	pass
 #	reset();
 
-func reset():
+func reset(): # i.e. pressing the refresh button
 	uiGroupList.clear()
 	group2ValidationStatusMap.clear();
 	scenesList.clear();
@@ -204,7 +204,7 @@ func fetchAllSubfolders(inDirCursor, inOutSubfolderList, inOutScenesList):
 	return true;
 
 func fillGroupsList():
-	loadDefinedGroups();
+	loadDefinedGroups(); # empty
 	assignScenes2Group();
 	internalFillGroupList();
 
