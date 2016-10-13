@@ -48,7 +48,7 @@ var groupsDatabase = {}; #group is the key, val is dict with properties "desc","
 ##################################################################################
 func _notification(what):
 	if (what == NOTIFICATION_INSTANCED):
-		uiGroupList = get_node("GroupList");
+		uiGroupList = get_node("Main Box/GroupList");
 	elif(what == NOTIFICATION_READY):
 		pass #only parts that are dependent on outside world (on theparents etc/also called when reparented) 
 
@@ -142,7 +142,7 @@ func _on_RefreshBtn_pressed():
 #########                       Connected Signals                        #########
 ##################################################################################
 func _on_GroupList_item_activated( index ):
-	var group = get_node("GroupList").get_item_text(index);
+	var group = get_node("Main Box/GroupList").get_item_text(index);
 	get_node("GroupDesc").showGroup(group, group2SceneMap);
 
 func _on_GroupDesc_onSave( groupID, groupDesc, groupMethods ):
@@ -184,7 +184,7 @@ func gatherInfo():
 		dirCursor.change_dir(currentFolder);
 		var success = fetchAllSubfolders(dirCursor, subfolderList, scenesList);
 		if(!success):
-			get_node("Title").set_text("Was not able to instance all scenes for some reason!");
+			get_node("Main Box/Title Bar/Title").set_text("Was not able to instance all scenes for some reason!");
 
 func fetchAllSubfolders(inDirCursor, inOutSubfolderList, inOutScenesList):
 	inDirCursor.list_dir_begin();
@@ -323,9 +323,3 @@ class SceneValidationInfo:
 		
 	func getFilePath():
 		return filePath;
-
-
-
-
-
-
