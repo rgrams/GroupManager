@@ -47,7 +47,7 @@ func showGroup(inGroup, group2SceneValidationInfo):
 	#
 	currentGroupID = inGroup;
 	memberList.clear();
-	get_node("Margin/Split 1/Split Top/Descr Box/titleDesc").set_text("Group: " + currentGroupID);
+	set_title("Group: " + currentGroupID)
 	methodList.clear();
 	get_node("Margin/Split 1/Split Top/Descr Box/description").set_text("");
 	
