@@ -139,3 +139,21 @@ func putMethodsInfo2String():
 ##################################################################################
 #########                         Inner Classes                          #########
 ##################################################################################
+
+
+##################################################################################
+#########                        Window Resizing                         #########
+##################################################################################
+var min_size = Vector2(340, 260)
+
+func _on_Resize_Button_button_down():
+	set_process(true)
+
+func _on_Resize_Button_button_up():
+	set_process(false)
+
+func _process(dt):
+	var size = get_global_mouse_pos() - get_global_pos()
+	size.x = max(size.x, min_size.x)
+	size.y = max(size.y, min_size.y)
+	set_size(size)

@@ -49,13 +49,12 @@ margin/left = 4.0
 margin/top = 4.0
 margin/right = 584.0
 margin/bottom = 514.0
-split/offset = 50
+split/offset = 15
 split/collapsed = false
 split/dragger_visibility = 0
 
 [node name="Split Top" type="VSplitContainer" parent="Margin/Split 1"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
@@ -64,8 +63,8 @@ size_flags/stretch_ratio = 0.0
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 580.0
-margin/bottom = 319.0
-split/offset = 100
+margin/bottom = 284.0
+split/offset = 30
 split/collapsed = false
 split/dragger_visibility = 0
 
@@ -78,7 +77,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 580.0
-margin/bottom = 126.0
+margin/bottom = 56.0
 alignment = 0
 
 [node name="titleDesc" type="Label" parent="Margin/Split 1/Split Top/Descr Box"]
@@ -89,9 +88,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 0.0
-margin/top = 3.0
+margin/top = 0.0
 margin/right = 580.0
-margin/bottom = 19.0
+margin/bottom = 16.0
 text = "Description:"
 valign = 2
 percent_visible = 1.0
@@ -108,7 +107,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 20.0
 margin/right = 580.0
-margin/bottom = 126.0
+margin/bottom = 56.0
 syntax_highlighting = false
 show_line_numbers = false
 highlight_all_occurrences = false
@@ -123,9 +122,9 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 138.0
+margin/top = 68.0
 margin/right = 580.0
-margin/bottom = 319.0
+margin/bottom = 284.0
 alignment = 0
 
 [node name="Methods bar" type="Container" parent="Margin/Split 1/Split Top/Methods Box"]
@@ -207,7 +206,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 24.0
 margin/right = 580.0
-margin/bottom = 181.0
+margin/bottom = 216.0
 
 [node name="Scenes Box" type="VBoxContainer" parent="Margin/Split 1"]
 
@@ -216,7 +215,7 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
 margin/left = 0.0
-margin/top = 331.0
+margin/top = 296.0
 margin/right = 580.0
 margin/bottom = 510.0
 alignment = 0
@@ -247,7 +246,7 @@ size_flags/vertical = 3
 margin/left = 0.0
 margin/top = 22.0
 margin/right = 580.0
-margin/bottom = 179.0
+margin/bottom = 214.0
 
 [node name="AddMethodPopup" parent="." instance=ExtResource( 2 )]
 
@@ -255,16 +254,17 @@ visibility/visible = false
 
 [node name="Bottom Buttons" type="HBoxContainer" parent="."]
 
+anchor/left = 3
 anchor/top = 1
-anchor/right = 1
+anchor/right = 3
 anchor/bottom = 1
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 3
 size_flags/vertical = 2
-margin/left = 162.0
+margin/left = 132.0
 margin/top = 36.0
-margin/right = 162.0
+margin/right = -132.0
 margin/bottom = 6.0
 custom_constants/separation = 12
 alignment = 0
@@ -301,6 +301,25 @@ shortcut = null
 text = "Cancel"
 flat = false
 
+[node name="Resize Button" type="Button" parent="."]
+
+anchor/left = 1
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 32.0
+margin/top = 34.0
+margin/right = 0.0
+margin/bottom = 2.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+flat = false
+
 [connection signal="pressed" from="Margin/Split 1/Split Top/Methods Box/Methods bar/addMethodBtn" to="." method="_on_addMethodBtn_pressed"]
 
 [connection signal="pressed" from="Margin/Split 1/Split Top/Methods Box/Methods bar/removeMethod" to="." method="_on_removeMethod_pressed"]
@@ -310,5 +329,9 @@ flat = false
 [connection signal="pressed" from="Bottom Buttons/OK Button" to="." method="_on_OK_Button_pressed"]
 
 [connection signal="pressed" from="Bottom Buttons/Cancel Button" to="." method="_on_Cancel_Button_pressed"]
+
+[connection signal="button_down" from="Resize Button" to="." method="_on_Resize_Button_button_down"]
+
+[connection signal="button_up" from="Resize Button" to="." method="_on_Resize_Button_button_up"]
 
 
