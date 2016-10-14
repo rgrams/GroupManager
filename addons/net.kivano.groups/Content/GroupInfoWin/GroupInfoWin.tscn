@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://addons/net.kivano.groups/Content/GroupInfoWin/GroupInfoWin.gd" type="Script" id=1]
 [ext_resource path="res://addons/net.kivano.groups/Content/GroupInfoWin/AddMethodPopup/AddMethodPopup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/net.kivano.groups/Content/assets/Resize_Handle_Normal.png" type="Texture" id=3]
+[ext_resource path="res://addons/net.kivano.groups/Content/assets/Resize_Handle_Pressed.png" type="Texture" id=4]
+[ext_resource path="res://addons/net.kivano.groups/Content/assets/Resize_Handle_Hover.png" type="Texture" id=5]
 
 [node name="GroupDesc" type="WindowDialog"]
 
@@ -301,7 +304,7 @@ shortcut = null
 text = "Cancel"
 flat = false
 
-[node name="Resize Button" type="Button" parent="."]
+[node name="Resize Button" type="TextureButton" parent="."]
 
 anchor/left = 1
 anchor/top = 1
@@ -311,14 +314,17 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 3
-margin/left = 32.0
-margin/top = 34.0
-margin/right = 0.0
-margin/bottom = 2.0
+margin/left = 26.0
+margin/top = 28.0
+margin/right = 2.0
+margin/bottom = 4.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-flat = false
+textures/normal = ExtResource( 3 )
+textures/pressed = ExtResource( 4 )
+textures/hover = ExtResource( 5 )
+params/scale = Vector2( 0.75, 0.75 )
 
 [connection signal="pressed" from="Margin/Split 1/Split Top/Methods Box/Methods bar/addMethodBtn" to="." method="_on_addMethodBtn_pressed"]
 

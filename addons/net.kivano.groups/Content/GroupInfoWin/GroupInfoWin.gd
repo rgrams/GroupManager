@@ -144,16 +144,17 @@ func putMethodsInfo2String():
 ##################################################################################
 #########                        Window Resizing                         #########
 ##################################################################################
-var min_size = Vector2(340, 260)
+var min_size = Vector2(325, 250)
 
 func _on_Resize_Button_button_down():
-	set_process(true)
+	set_process_input(true)
 
 func _on_Resize_Button_button_up():
-	set_process(false)
+	set_process_input(false)
 
-func _process(dt):
-	var size = get_global_mouse_pos() - get_global_pos()
-	size.x = max(size.x, min_size.x)
-	size.y = max(size.y, min_size.y)
-	set_size(size)
+func _input(event):
+	if event.type == InputEvent.MOUSE_MOTION:
+		var size = get_size() + event.relative_pos
+		size.x = max(min_size.x, size.x)
+		size.y = max(min_size.y, size.y)
+		set_size(size)
