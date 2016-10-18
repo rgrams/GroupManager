@@ -8,7 +8,7 @@ extends WindowDialog
 ##################################################################################
 #########                     Imported classes/scenes                    #########
 ##################################################################################
-var GroupManagerWinScn = preload("../GroupManagerWindow.tscn");
+#var GroupManagerWinScn = preload("../GroupManagerWindow.tscn");
 
 ##################################################################################
 #########                       Signals definitions                      #########
@@ -36,7 +36,7 @@ func _notification(what):
 		methodList = get_node("Margin/Split 1/Split Top/Methods Box/methodList")
 		memberList = get_node("Margin/Split 1/Scenes Box/memberList")
 	elif(what == NOTIFICATION_READY):
-		 groupManagerLogicRoot = get_node(path2GroupManagerRoot);
+		groupManagerLogicRoot = get_node(path2GroupManagerRoot);
 
 
 ##################################################################################
